@@ -7,38 +7,42 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
-
 public class EbiletScraper {
     private static final Logger LOGGER = LoggerFactory.getLogger(EbiletScraper.class);
-    private WebElement route;
-    private WebElement stations;
-    private WebElement dates;
-    private WebElement passangers;
+    private WebElement trainDepartureStation;
+    private WebElement trainArrivalStation;
+    private WebElement departureDate;
+    private WebElement arrivalDate;
     private WebElement button;
 
     public EbiletScraper(String url) {
         WebDriver driver = new ChromeDriver();
         driver.get(url);
         WebElement buyTicketArea = driver.findElement(By.id("buyTicket"));
-        List<WebElement> elements = buyTicketArea.findElements(By.cssSelector("div.row"));
-        this.route = elements.get(0);
-        this.stations = elements.get(1);
-        this.dates = elements.get(2);
-        this.passangers = elements.get(3);
-        this.button = elements.get(4);
+        trainDepartureStation = buyTicketArea.findElement(By.cssSelector("input[name='Tren kalkış']"));
+        trainArrivalStation = buyTicketArea.findElement(By.cssSelector("input[name='Tren varış']"));
+        departureDate = buyTicketArea.findElement(By.cssSelector("input[placeholder='Gidiş Tarihi']"));
+        WebElement arrivalEnableButton = buyTicketArea.findElement(By.cssSelector("button.btnAddReturn"));
+        arrivalEnableButton.click();
+        arrivalDate = buyTicketArea.findElement(By.cssSelector("input[placeholder='Dönüş Tarihi']"));
+        button = buyTicketArea.findElement(By.cssSelector("button.btnSeferSearch"));
+        assert trainArrivalStation != null;
+        assert trainDepartureStation != null;
+        assert departureDate != null;
+        assert arrivalDate != null;
+        assert button != null;
         LOGGER.info(this.toString());
     }
 
     @Override
     public String toString() {
-        String innerHTML = "innerHTML";
+        String outerHTML = "outerHTML";
         return "EbiletScraper{" +
-                "route=" + this.route.getAttribute(innerHTML) +
-                ", stations=" + this.stations.getAttribute(innerHTML) +
-                ", dates=" + this.dates.getAttribute(innerHTML) +
-                ", passangers=" + this.passangers.getAttribute(innerHTML) +
-                ", button=" + this.button.getAttribute(innerHTML) +
+                "trainDepartureStation=" + trainDepartureStation.getAttribute(outerHTML) +
+                ", trainArrivalStation=" + trainArrivalStation.getAttribute(outerHTML) +
+                ", departureDate=" + departureDate.getAttribute(outerHTML) +
+                ", arrivalDate=" + arrivalDate.getAttribute(outerHTML) +
+                ", button=" + button.getAttribute(outerHTML) +
                 '}';
     }
 }
