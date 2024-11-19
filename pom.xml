@@ -14,23 +14,17 @@
 	<name>Ebilet selenium bot</name>
 	<description>Ebilet selenium ile bilet uygunluğu tespiti</description>
 	<url/>
-	<licenses>
-		<license/>
-	</licenses>
 	<developers>
-		<developer/>
+		<developer>
+			<name>Mustafa Ünal</name>
+		</developer>
 	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
 	<properties>
 		<java.version>21</java.version>
+		<jcloverslf4j.version>1.7.9</jcloverslf4j.version>
 	</properties>
 	<dependencies>
-		<dependency>
+	<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
@@ -50,7 +44,6 @@
 			<version>4.26.0</version>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
